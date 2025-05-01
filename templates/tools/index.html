@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}All Calculators | UST Bank{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h2>Calculators</h2>
+  <div class="grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:1rem; margin-top:1rem;">
+    {% for calc in calculators %}
+      <a href="{% url calc.url_name %}" class="card" style="text-align:center; padding:1.5rem;">
+        <h4>{{ calc.name }}</h4>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
