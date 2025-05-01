@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Vault Balance | UST Bank{% endblock %}
+
+{% block content %}
+<div class="card" style="text-align:center; padding:2rem; max-width:500px; margin:auto;">
+  <h2>Vault Balance</h2>
+  <p style="margin:1rem 0;">Total funds held across all customer accounts:</p>
+  <div style="font-size:2rem; font-weight:600; color:#4e54c8; margin-bottom:1.5rem;">
+    ₹ {{ total_balance }}
+  </div>
+  <p><a href="{% url 'accounts:profile' %}" class="button secondary">Back to Dashboard</a></p>
+</div>
+{% endblock %}

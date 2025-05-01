@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Register | UST Bank{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width:600px; margin:auto;">
+  <h2 style="text-align:center; margin-bottom:1.5rem;">Create Your Account</h2>
+  <form method="post" style="display:flex; flex-direction:column; gap:1.25rem;">
+    {% csrf_token %}
+
+    <div class="form-group">
+      {{ form.username.label_tag }}<br>
+      {{ form.username }}
+      {% if form.username.help_text %}
+        <small style="color:#777;">{{ form.username.help_text }}</small>
+      {% endif %}
+      {% if form.username.errors %}
+        <p style="color:#d9534f; font-size:0.9rem;">{{ form.username.errors }}</p>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      {{ form.email.label_tag }}<br>
+      {{ form.email }}
+      {% if form.email.help_text %}
+        <small style="color:#777;">{{ form.email.help_text }}</small>
+      {% endif %}
+      {% if form.email.errors %}
+        <p style="color:#d9534f; font-size:0.9rem;">{{ form.email.errors }}</p>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      {{ form.password1.label_tag }}<br>
+      {{ form.password1 }}
+      {% if form.password1.errors %}
+        <p style="color:#d9534f; font-size:0.9rem;">{{ form.password1.errors }}</p>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      {{ form.password2.label_tag }}<br>
+      {{ form.password2 }}
+      {% if form.password2.errors %}
+        <p style="color:#d9534f; font-size:0.9rem;">{{ form.password2.errors }}</p>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label style="font-weight:600; margin-bottom:0.5rem;">I am a</label>
+      <div style="display:flex; gap:1.5rem;">
+        {% for choice in form.user_type %}
+          <label style="display:flex; align-items:center; gap:0.5rem;">
+            {{ choice.tag }}
+            <span>{{ choice.choice_label }}</span>
+          </label>
+        {% endfor %}
+      </div>
+      {% if form.user_type.errors %}
+        <p style="color:#d9534f; font-size:0.9rem;">{{ form.user_type.errors }}</p>
+      {% endif %}
+    </div>
+
+    <button type="submit" style="align-self:center; padding:0.75rem 1.5rem;">Register</button>
+  </form>
+
+  <p style="text-align:center; margin-top:1.25rem;">
+    Already have an account? <a href="{% url 'accounts:login' %}" style="color:#0077cc;">Log in</a>
+  </p>
+</div>
+{% endblock %}

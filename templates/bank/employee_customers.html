@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}All Customers | UST Bank{% endblock %}
+
+{% block content %}
+<div class="card">
+  <h2>Customer Balances</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Balance</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for acct in customers %}
+      <tr>
+        <td>{{ acct.user.username }}</td>
+        <td>{{ acct.user.email }}</td>
+        <td>₹ {{ acct.balance }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3" style="text-align:center;">No customers found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p style="text-align:center; margin-top:1rem;"><a href="{% url 'accounts:profile' %}" class="button secondary">Back to Dashboard</a></p>
+</div>
+
+<style>
+  /* Table styles */
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  .table th, .table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid #e0e0e0;
+    text-align: left;
+  }
+  .table th {
+    background-color: #f5f7fa;
+    font-weight: 600;
+  }
+  .table tr:nth-child(even) {
+    background-color: #fafbfc;
+  }
+</style>
+{% endblock %}
