@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | UST Bank{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <h2>Welcome, {{ request.user.username }}!</h2>
+    <p>You are logged in as a <strong>{{ request.user.get_user_type_display }}</strong>.</p>
+  </div>
+
+  {% if request.user.is_customer %}
+    <div class="card">
+      <h3>Customer Dashboard</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+        <a href="{% url 'bank:balance' %}" class="card" style="text-align: center; padding: 1rem;">
+          <h4>Account Balance</h4>
+        </a>
+        <a href="{% url 'bank:deposit' %}" class="card" style="text-align: center; padding: 1rem;">
+          <h4>Deposit Funds</h4>
+        </a>
+        <a href="{% url 'bank:withdraw' %}" class="card" style="text-align: center; padding: 1rem;">
+          <h4>Withdraw Funds</h4>
+        </a>
+        <a href="{% url 'ml_model:predict-loan' %}" class="card" style="text-align: center; padding: 1rem;">
+          <h4>Loan Amount Estimator</h4>
+        </a>
+      </div>
+    </div>
+
+  {% elif request.user.is_employee %}
+    <div class="card">
+      <h3>Employee Dashboard</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">
+        <a href="{% url 'bank:employee_customers' %}" class="card" style="text-align:center; padding:1rem;"><h4>View Customers</h4></a>
+        <a href="{% url 'bank:vault_balance' %}" class="card" style="text-align:center; padding:1rem;"><h4>Vault Balance</h4></a>
+        <a href="{% url 'bank:transaction_records' %}" class="card" style="text-align:center; padding:1rem;"><h4>Transactions</h4></a>
+        <a href="{% url 'ml_model:predict-loan' %}" class="card" style="text-align:center; padding:1rem;"><h4>Loan Estimator</h4></a>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="card" style="text-align:center;">
+    <a href="{% url 'accounts:logout' %}" style="color:#0077cc; font-weight:600; text-decoration:none;">Log out</a>
+  </div>
+{% endblock %}
