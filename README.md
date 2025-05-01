@@ -348,7 +348,7 @@ sequenceDiagram
     DjangoView-->>User: {"predicted_amount": 250000}
 ```
 
-## 5. Security Considerations (Detailed)
+## 5. Security Considerations (Detailed) & Purpose <a name="5-security-considerations"></a> 
 
 A robust security posture is essential for any banking application. Below is an expanded breakdown of each security domain, including implementation notes and sample configurations.
 
